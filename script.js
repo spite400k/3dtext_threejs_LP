@@ -7,8 +7,10 @@ import { TextGeometry } from "./geometries/TextGeometry.js";
 const scene = new THREE.Scene();
 
 const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
+  // width: window.innerWidth,
+  // height: window.innerHeight,
+  width:400,
+  height:150,
 };
 
 // const helper = new THREE.AxesHelper();
@@ -21,7 +23,8 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100
 );
-camera.position.set(1, 1, 2);
+camera.position.set(0, 0, 3);
+camera.lookAt(new THREE.Vector3(0, 0, 0));
 scene.add(camera);
 
 // Renderer
@@ -35,20 +38,27 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 //Fonts
 const fontLoader = new FontLoader();
 fontLoader.load("./fonts/helvetiker_regular.typeface.json", function(font){
-  console.log(font);
+// fontLoader.load("./fonts/Noto Sans JP Medium_Regular.json", function(font){
+    console.log(font);
 
-  const textGeometry = new TextGeometry("haruto yuto" , {
+  const textGeometry = new TextGeometry("Techman2021" , {
     font:font,
-    size:0.5,
+    size:1,
     height:0.2,
-    curveSegment:12,
-    bevelEnabled:true,
-    bevelThickness:0.04,
-    bevelSize:0.02,
-    bevelOffset:0,
-    bevelSegment:5,
+    // curveSegment:0,
+    // bevelEnabled:true,
+    // bevelThickness:0.04,
+    // bevelSize:0.02,
+    // bevelOffset:0,
+    // bevelSegment:5,
   });
   textGeometry.center();
+  // const textGeometry2 = new TextGeometry("マウスで回転するよ" , {
+  //   font:font,
+  //   size:1,
+  //   height:0.2,
+  // });
+  // textGeometry2.center();
 
   //material
   const textMaterial = new THREE.MeshNormalMaterial();
@@ -62,6 +72,8 @@ fontLoader.load("./fonts/helvetiker_regular.typeface.json", function(font){
   //mesh
   const text = new THREE.Mesh(textGeometry, textMaterial);
   scene.add(text);
+  // const text2 = new THREE.Mesh(textGeometry2, textMaterial);
+  // scene.add(text2);
 
   //boxGeometry
   const boxGeometry = new THREE.BoxGeometry(0.5, 0.5,0.5);
@@ -69,7 +81,7 @@ fontLoader.load("./fonts/helvetiker_regular.typeface.json", function(font){
   // const material = new THREE.MeshPhongMaterial(); 
   const material = new THREE.MeshToonMaterial({color: 0x52070});   
 
-  for(let i=0; i<100;i++){
+  for(let i=0; i<10;i++){
     const box = new THREE.Mesh(boxGeometry,material);
 
     box.position.x = (Math.random() - 0.5) * 10;
